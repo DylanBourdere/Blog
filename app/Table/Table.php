@@ -25,7 +25,7 @@ class Table
 
     public static function query($statement, $attributes = null, $one = false){
         if($attributes){
-            return App::getDb()->prepare($statement, $attributes, get_called_class());
+            return App::getDb()->prepare($statement, $attributes, get_called_class(), $one);
         }else{
             return App::getDb()->query($statement, get_called_class(), $one);
         }
@@ -34,7 +34,7 @@ class Table
     public static function all(){
         return App::getDb()->query("
             SELECT *
-            FROM ". static::$table ."
+            FROM ". static::getTable() ."
         ", get_called_class());
     }
 
