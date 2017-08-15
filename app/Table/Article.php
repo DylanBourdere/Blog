@@ -3,7 +3,7 @@ namespace App\Table;
 
 use App\App;
 
-class Article
+class Article extends Table
 {
 
     public static function getLast()
@@ -16,31 +16,11 @@ class Article
         , __CLASS__);
     }
 
-    /**
-     * __get
-     * @param mixed $key 
-     * @return mixed 
-     */
-    public function __get($key)
-    {
-        $method = 'get' . ucfirst($key);
-        $this->$key = $this->$method();
-        return $this->$key;
-    }
-
-    /**
-     * getUrl
-     * @return mixed 
-     */
     public function getUrl()
     {
         return 'index.php?p=article&id=' . $this->id;
     }
 
-    /**
-     * getExtrait
-     * @return mixed 
-     */
     public function getExtrait()
     {
         $html = '<p>'. substr($this->contenu, 0, 100) .'...</p>';
