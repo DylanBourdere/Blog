@@ -14,14 +14,6 @@ class Database
     private $db_host;
     private $pdo;
 
-    /**
-     * Construct
-     *
-     * @param string $db_name
-     * @param string $db_user
-     * @param string $db_pass
-     * @param string $db_host
-     */
     public function __construct($db_name, $db_user = 'root', $db_pass = '', $db_host = 'localhost')
     {
         $this->db_name = $db_name;
@@ -30,11 +22,6 @@ class Database
         $this->db_host = $db_host;
     }
 
-    /**
-     * Create a PDO connection if doesnt exist
-     *
-     * @return PDO
-     */
     private function getPDO()
     {
         if($this->pdo === null){
@@ -45,10 +32,18 @@ class Database
         return $this->pdo;
     }
 
-    public function query($stmt, $class_name)
+    public function query($stmt, $class_name, $one = false)
     {
         $req = $this->getPDO()->query($stmt);
-        $datas = $req->fetchAll(PDO::FETCH_CLASS, $class_name);
+        $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        if($one)
+        {
+            $datas = $req->fetch();
+        }
+        else
+        {
+            $datas = $req->fetchAll();
+        }
         return $datas;
     }
 
