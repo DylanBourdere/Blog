@@ -2,32 +2,14 @@
 namespace App; 
 class App{
 
-    const DB_NAME = 'blog';
-    const DB_USER = 'root';
-    const DB_PASS = '';
-    const DB_HOST = 'localhost';
+    public $title = "Blog";
+    private static $_instance;
 
-    private static $database;
-    private static $title = 'Blog';
-
-    public static function getDb(){
-        if( self::$database === null )
-        {
-            self::$database = new Database(self::DB_NAME, self::DB_USER, self::DB_PASS, self::DB_HOST);
+    public static function getInstance(){
+        if(self::$_instance === null){
+            self::$_instance = new App();
         }
-        return self::$database;
+        return self::$_instance;
     }
 
-    public static function notFound(){
-        header("HTTP/1.0 404 Not Found");
-        header('Location:index.php?p=404');
-    }
-
-    public static function getTitle(){
-        return self::$title;
-    }
-
-    public static function setTitle($title){
-        self::$title = $title;
-    }
 }
