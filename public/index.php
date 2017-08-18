@@ -3,6 +3,6 @@
 require '../app/Autoloader.php';
 App\Autoloader::register();
 
+$app = App\App::getInstance();
 
-var_dump(App\Config::getInstance()->get('db_user'));
-?>
+$post = $app->getTable('Posts');
