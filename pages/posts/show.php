@@ -1,14 +1,12 @@
 <?php
-use App\App;
-use App\Table\Article;
+$app = App::getInstance();
 
-$post = Article::find($_GET['id']);
+$post = $app->getTable('Post')->find($_GET['id']);
 
 
 if($post === false){
-    App::notFound();
+    $app->notFound();
 }
-App::setTitle($post->titre);
 ?> 
 
 <h1><?= $post->titre; ?></h1>
