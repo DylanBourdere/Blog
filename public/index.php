@@ -1,27 +1,21 @@
 <?php
-
-require '../app/Autoloader.php';
-App\Autoloader::register();
+define ('ROOT', dirname(__DIR__));
+require ROOT . '/app/App.php';
+App::load();
 
 if(isset($_GET['p'])){
-    $p = $_GET['p'];
-}else {
-    $p = 'home';
+    $page = $_GET['p'];
+}else{
+    $page = 'home';
 }
-
-//Init
-
-$db = new App\Database('blog');
-
 
 ob_start();
-if($p === 'home'){
-    require '../pages/home.php';
-}elseif($p === 'article'){
-    require '../pages/single.php';
-}elseif($p === 'categorie'){
-    require '../pages/categorie.php';
+if($page === 'home'){
+    require ROOT . '/pages/posts/home.php';
+}elseif($page === 'posts.category'){
+    require ROOT . '/pages/posts/category.php';
+}elseif($page === 'posts.show'){
+    require ROOT . '/pages/posts/show.php';
 }
 $content = ob_get_clean();
-require '../pages/templates/default.php';
-?>
+require ROOT . '/pages/templates/default.php';
