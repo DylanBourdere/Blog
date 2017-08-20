@@ -1,13 +1,13 @@
 <?php
 $app = App::getInstance();
-
-$categorie = $app->getTable('Category')->find($_GET['id']);
+$id = $app->getRouteId();
+$categorie = $app->getTable('Category')->find($id);
 
 if($categorie === false){
     $app->notFound();
 }
 
-$articles = $app->getTable('Post')->lastByCategory($_GET['id']);
+$articles = $app->getTable('Post')->lastByCategory($id);
 $categories = $app->getTable('Category')->all();
 ?>
 <h1><?= $categorie->titre; ?></h1>

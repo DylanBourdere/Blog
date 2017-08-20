@@ -7,6 +7,7 @@ class App{
 
     public $title = "Blog";
     private $db_instance;
+    public $routeId;
 
     private static $_instance;
 
@@ -16,6 +17,14 @@ class App{
             self::$_instance = new App();
         }
         return self::$_instance;
+    }
+
+    public function setRouteId($id){
+        $this->routeId = $id;
+    }
+
+    public function getRouteId(){
+        return $this->routeId[0];
     }
 
     public static function load(){

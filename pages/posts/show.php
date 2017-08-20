@@ -1,7 +1,7 @@
 <?php
 $app = App::getInstance();
-
-$post = $app->getTable('Post')->find($_GET['id']);
+$id = array_shift($id);
+$post = $app->getTable('Post')->find($id);
 
 
 if($post === false){
