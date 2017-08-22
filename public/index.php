@@ -3,21 +3,19 @@ define ('ROOT', dirname(__DIR__));
 require ROOT . '/app/App.php';
 App::load();
 
+if(isset($_GET['p'])){
+    $page = $_GET['p'];
+}else{
+    $page = 'home';
+}
 
 ob_start();
-$router = new Core\Router\Router($_GET['url']);
-$router->get('/', function(){require ROOT . '/pages/posts/home.php';});
-$router->get('/home', function(){require ROOT . '/pages/posts/home.php';});
-$router->get('/posts/category/:id', function($id){
-    $app = App::getInstance();
-    $app->setRouteId($id);
+if($page === 'home'){
+    require ROOT . '/pages/posts/home.php';
+}elseif($page === 'posts.category'){
     require ROOT . '/pages/posts/category.php';
-});
-$router->get('/posts/show/:id', function($id){
-    $app = App::getInstance();
-    $app->setRouteId($id);
+}elseif($page === 'posts.show'){
     require ROOT . '/pages/posts/show.php';
-});
-$router->run();
+}
 $content = ob_get_clean();
 require ROOT . '/pages/templates/default.php';
