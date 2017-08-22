@@ -22,8 +22,18 @@ if($page === 'home'){
     require ROOT . '/pages/admin/posts/index.php';
 }elseif($page === 'posts.edit'){
     require ROOT . '/pages/admin/posts/edit.php';
-}elseif($page === 'posts.show'){
-    require ROOT . '/pages/admin/posts/show.php';
+}elseif($page === 'posts.add'){
+    require ROOT . '/pages/admin/posts/add.php';
+}elseif($page === 'posts.delete'){
+    require ROOT . '/pages/admin/posts/delete.php';
+}elseif($page === 'category'){
+    require ROOT . '/pages/admin/category/index.php';
+}elseif($page === 'category.delete'){
+    require ROOT . '/pages/admin/category/delete.php';
+}elseif($page === 'category.add'){
+    require ROOT . '/pages/admin/category/add.php';
+}elseif($page === 'category.edit'){
+    require ROOT . '/pages/admin/category/edit.php';
 }
 $content = ob_get_clean();
 require ROOT . '/pages/templates/default.php';

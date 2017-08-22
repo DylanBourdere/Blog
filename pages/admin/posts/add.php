@@ -1,20 +1,17 @@
 <?php
 $postTable = App::getInstance()->getTable('Post');
 if(!empty($_POST)){
-    $result = $postTable->update($_GET['id'], [
+    $result = $postTable->create([
         'titre' => $_POST['titre'],
         'contenu' => $_POST['contenu'],
         'category_id' => $_POST['category_id']
     ]);
     if($result){
-        ?>
-        <div class="alert alert-success">Enregistrement effectué</div>
-        <?php
+        header('Location: admin.php?p=posts.edit&id=' . App::getInstance()->getDb()->lastInsertId());
     }
 }
-$post = $postTable->find($_GET['id']);
 $categories =  App::getInstance()->getTable('Category')->extract('id', 'titre');
-$form = new \Core\HTML\BootstrapForm($post);
+$form = new \Core\HTML\BootstrapForm($_POST);
 ?>
 
 <form method="POST">
