@@ -6,18 +6,17 @@ App::load();
 if(isset($_GET['p'])){
     $page = $_GET['p'];
 }else{
-    $page = 'home';
+    $page = 'posts.index';
 }
 
-ob_start();
-if($page === 'home'){
-    require ROOT . '/pages/posts/home.php';
-}elseif($page === 'posts.category'){
-    require ROOT . '/pages/posts/category.php';
-}elseif($page === 'posts.show'){
-    require ROOT . '/pages/posts/show.php';
-}elseif($page === 'login'){
-    require ROOT . '/pages/users/login.php';
+$page = explode('.', $page);
+if($page[0] == 'admin'){
+    $controller = '\App\Controller\Admin\\' . ucfirst($page[1]) . 'Controller';
+    $action = $page[2];
+}else{
+    $action = $page[1];
+    $controller = '\App\Controller\\' . ucfirst($page[0]) . 'Controller';
 }
-$content = ob_get_clean();
-require ROOT . '/pages/templates/default.php';
+$controller = new $controller();
+$controller->$action();
+
